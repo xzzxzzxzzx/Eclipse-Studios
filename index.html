@@ -183,7 +183,6 @@
         position: relative;
         z-index: 1;
         will-change: transform, opacity;
-        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
     }
     .hero h1 {
         font-size: clamp(3rem, 10vw, 5rem);
@@ -597,10 +596,15 @@
         });
     });
 
-    // Parallax effect on hero (optimized + respects reduced motion)
+    // Parallax effect on hero (desktop only, respects reduced motion)
     const heroContent = document.querySelector('.hero-content');
     let latestScrollY = 0;
     let ticking = false;
+
+    // Detect mobile-sized screens
+    function isMobileScreen() {
+        return window.matchMedia('(max-width: 768px)').matches;
+    }
 
     function updateHero() {
         const scrolled = latestScrollY;
@@ -611,15 +615,35 @@
         ticking = false;
     }
 
-    if (!prefersReducedMotion && heroContent) {
-        window.addEventListener('scroll', () => {
-            latestScrollY = window.pageYOffset;
-            if (!ticking) {
-                window.requestAnimationFrame(updateHero);
-                ticking = true;
-            }
-        });
+    // Only enable parallax on desktop + no reduced-motion preference
+    function setupParallax() {
+        if (!heroContent) return;
+
+        // Reset for mobile
+        if (isMobileScreen() || prefersReducedMotion) {
+            heroContent.style.transform = 'translateY(0)';
+            heroContent.style.opacity = '1';
+            window.removeEventListener('scroll', onScrollParallax);
+            return;
+        }
+
+        // Desktop: add scroll listener
+        window.addEventListener('scroll', onScrollParallax);
     }
-</script>
-</body>
+
+    function onScrollParallax() {
+        latestScrollY = window.pageYOffset;
+        if (!ticking) {
+            window.requestAnimationFrame(updateHero);
+            ticking = true;
+        }
+    }
+
+    // Run once on load
+    setupParallax();
+
+    // Re-run if screen size/orientation changes
+    window.addEventListener('resize', setupParallax);
+    </script>
+    </body>
 </html>
