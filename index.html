@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Eclipse Studios</title>
 <link rel="icon" type="image/png" href="32x32.png">
+
+<!-- Basic SEO -->
+<meta name="description" content="Eclipse Studios is a Saudi-born game studio crafting atmospheric, story-driven experiences under the eclipse." />
+
+<!-- Social / Open Graph -->
+<meta property="og:title" content="Eclipse Studios" />
+<meta property="og:description" content="A Saudi game studio born under the eclipse, creating cinematic, immersive games." />
+<meta property="og:type" content="website" />
+<!-- Replace this with your real absolute URL -->
+<meta property="og:image" content="https://example.com/og-image.png" />
+
 <style>
     * {
         margin: 0;
@@ -59,14 +70,11 @@
         color: #fff;
         text-decoration: none;
         cursor: pointer;
-        text-shadow: 
+        text-shadow:
             0 0 5px #fff,
             0 0 10px #fff,
             0 0 20px #f99d00,
-            0 0 30px #f99d00,
-            0 0 40px #f99d00,
-            0 0 55px #f99d00,
-            0 0 75px #f99d00;
+            0 0 30px #f99d00;
     }
 
     .logo-image {
@@ -89,35 +97,55 @@
         font-size: 14px;
         font-weight: 600;
         transition: all 0.3s;
-        text-shadow: 
+        text-shadow:
             0 0 5px #fff,
             0 0 10px #f99d00,
-            0 0 20px #f99d00,
-            0 0 30px #f99d00,
-            0 0 40px #f99d00;
+            0 0 20px #f99d00;
     }
 
-    .nav-links a:hover {
-        text-shadow: 
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+        text-shadow:
             0 0 5px #fff,
             0 0 15px #fff,
             0 0 25px #f99d00,
-            0 0 35px #f99d00,
-            0 0 50px #f99d00,
-            0 0 65px #f99d00,
-            0 0 80px #f99d00;
+            0 0 35px #f99d00;
     }
 
-    /* Hamburger menu toggle button */
-    .menu-toggle {
-        display: none;
-        font-size: 24px;
-        cursor: pointer;
-        color: #fff;
-        background: rgba(0,0,0,0.2);
-        padding: 8px 12px;
-        border-radius: 8px;
+    /* Keyboard focus outline */
+    a:focus-visible,
+    button:focus-visible {
+        outline: 2px solid #ffdd00;
+        outline-offset: 3px;
     }
+
+    .menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #f99d00,
+        0 0 20px #f99d00,
+        0 0 30px #f99d00;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+    text-shadow:
+        0 0 8px #fff,
+        0 0 20px #fff,
+        0 0 30px #f99d00,
+        0 0 40px #f99d00,
+        0 0 60px #f99d00;
+    transform: scale(1.1);
+}
 
     /* Hero */
     .hero {
@@ -154,6 +182,8 @@
     .hero-content {
         position: relative;
         z-index: 1;
+        will-change: transform, opacity;
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
     }
     .hero h1 {
         font-size: clamp(3rem, 10vw, 5rem);
@@ -186,9 +216,31 @@
         transition: transform 0.3s, box-shadow 0.3s;
         box-shadow: 0 5px 30px rgba(255, 136, 0, 0.4);
     }
-    .cta-button:hover {
+    .cta-button:hover,
+    .cta-button:focus-visible {
         transform: translateY(-2px);
         box-shadow: 0 10px 50px rgba(255, 136, 0, 0.6), 0 0 30px rgba(255, 221, 0, 0.4);
+    }
+
+    /* About Section */
+    .about {
+        padding: 120px 0;
+    }
+    .about-inner {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .about h2 {
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 24px;
+        letter-spacing: -1px;
+    }
+    .about p {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
     }
 
     /* Projects Section */
@@ -214,6 +266,7 @@
         padding: 40px;
         transition: all 0.3s;
         cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
     .project-card:hover {
         background: rgba(255, 255, 255, 0.05);
@@ -287,28 +340,79 @@
         color: #fff;
         text-decoration: none;
         transition: all 0.3s;
+        font-size: 20px;
     }
-    .social-links a:hover {
+    .social-links a:hover,
+    .social-links a:focus-visible {
         background: radial-gradient(circle, #ffdd00 0%, #ffaa00 30%, #ff8800 60%, #ff6600 100%);
         transform: translateY(-3px);
         box-shadow: 0 5px 20px rgba(255, 136, 0, 0.4);
+        color: #000;
     }
     footer p {
         color: rgba(255, 255, 255, 0.4);
         font-size: 14px;
     }
 
+    /* Reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            scroll-behavior: auto !important;
+            transition: none !important;
+        }
+        .hero-content {
+            transform: none !important;
+            opacity: 1 !important;
+        }
+        .hero::before {
+            animation: none !important;
+        }
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
+        nav {
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo-image {
+            height: 60px;
+        }
+
+        .hero {
+            padding: 0 20px;
+        }
+
         .hero h1 {
             font-size: 48px;
         }
         .hero h2 {
             font-size: 24px;
         }
+
         .projects-grid {
             grid-template-columns: 1fr;
         }
+
+        /* Tone down heavy effects on mobile */
+        header {
+            backdrop-filter: none;
+            background: rgba(10, 10, 10, 0.95);
+        }
+        .hero::before {
+            filter: blur(40px);
+            opacity: 0.6;
+        }
+        .logo,
+        .nav-links a {
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #f99d00;
+        }
+
         /* Show hamburger menu */
         .menu-toggle {
             display: block;
@@ -332,7 +436,7 @@
         /* Adjust logo container for mobile */
         .logo-container {
             width: 100%;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
     }
 </style>
@@ -341,11 +445,11 @@
 <header id="top">
     <nav>
         <div class="logo-container">
-            <img class="logo-image" src="Eclipse Studios Logo Clear.png" alt="Logo" />
+            <img class="logo-image" src="Eclipse Studios Logo Clear.png" alt="Eclipse Studios logo" />
             <a href="#top" class="logo">ECLIPSE STUDIOS</a>
         </div>
         <!-- Hamburger menu button -->
-        <div class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false">☰</div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
         <!-- Navigation links -->
         <ul class="nav-links" id="nav-links">
             <li><a href="#work">Work</a></li>
@@ -360,6 +464,19 @@
         <h1>Welcome to Eclipse Studios</h1>
         <h2>A Saudi game studio born under the eclipse</h2>
         <a href="#work" class="cta-button">View Our Work</a>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-inner">
+            <h2>About Eclipse Studios</h2>
+            <p>
+                Eclipse Studios is a Saudi-born game studio focused on crafting atmospheric, story-driven experiences. 
+                We blend cinematic visuals, tight gameplay, and emotional storytelling to create worlds that feel both 
+                haunting and unforgettable — all under the glow of the eclipse.
+            </p>
+        </div>
     </div>
 </section>
 
@@ -421,7 +538,8 @@
 <footer id="contact">
     <div class="container">
         <div class="social-links">
-            <a href="#" aria-label="Twitter">𝕏</a>
+            <!-- Replace # with your real links -->
+            <a href="#" aria-label="Twitter/X">𝕏</a>
             <a href="#" aria-label="Discord">D</a>
             <a href="#" aria-label="YouTube">▶</a>
         </div>
@@ -430,49 +548,78 @@
 </footer>
 
 <script>
-    // Toggle mobile menu
+    // Cache elements
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        // Toggle aria-expanded for accessibility
-        const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-        menuToggle.setAttribute('aria-expanded', String(!expanded));
-    });
+    // Toggle mobile menu
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+        });
+    }
 
-    // Smooth scroll behavior
+    // Smooth scroll behavior (respect reduced motion)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const href = this.getAttribute('href');
+            if (!href) return;
 
-            if (href === '#top') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+            const targetIsTop = href === '#top';
+            const target = targetIsTop ? null : document.querySelector(href);
+
+            if (targetIsTop || target) {
+                e.preventDefault();
+                if (prefersReducedMotion) {
+                    if (targetIsTop) {
+                        window.scrollTo({ top: 0 });
+                    } else {
+                        const rect = target.getBoundingClientRect();
+                        window.scrollTo({ top: window.pageYOffset + rect.top });
+                    }
+                } else {
+                    if (targetIsTop) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
             }
 
             // Close menu on mobile after clicking
-            if (navLinks.classList.contains('active')) {
+            if (navLinks && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
             }
         });
     });
 
-    // Parallax effect on hero
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero-content');
-        if (hero) {
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            hero.style.opacity = 1 - scrolled / 700;
+    // Parallax effect on hero (optimized + respects reduced motion)
+    const heroContent = document.querySelector('.hero-content');
+    let latestScrollY = 0;
+    let ticking = false;
+
+    function updateHero() {
+        const scrolled = latestScrollY;
+        if (heroContent) {
+            heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+            heroContent.style.opacity = 1 - scrolled / 700;
         }
-    });
+        ticking = false;
+    }
+
+    if (!prefersReducedMotion && heroContent) {
+        window.addEventListener('scroll', () => {
+            latestScrollY = window.pageYOffset;
+            if (!ticking) {
+                window.requestAnimationFrame(updateHero);
+                ticking = true;
+            }
+        });
+    }
 </script>
 </body>
 </html>
