@@ -596,14 +596,14 @@
         });
     });
 
-    // Parallax effect on hero (desktop only, respects reduced motion)
+    // Parallax effect on hero (disabled on iPhone and mobile, respects reduced motion)
     const heroContent = document.querySelector('.hero-content');
     let latestScrollY = 0;
     let ticking = false;
 
-    // Detect mobile-sized screens
-    function isMobileScreen() {
-        return window.matchMedia('(max-width: 768px)').matches;
+    // Detect iPhone or small mobile screens
+    function isMobileOrIOS() {
+        return /iPhone|iPod|iPad/i.test(navigator.userAgent) || window.matchMedia('(max-width: 768px)').matches;
     }
 
     function updateHero() {
@@ -615,19 +615,18 @@
         ticking = false;
     }
 
-    // Only enable parallax on desktop + no reduced-motion preference
     function setupParallax() {
         if (!heroContent) return;
 
-        // Reset for mobile
-        if (isMobileScreen() || prefersReducedMotion) {
+        // If mobile or iPhone → disable animation
+        if (isMobileOrIOS() || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             heroContent.style.transform = 'translateY(0)';
             heroContent.style.opacity = '1';
             window.removeEventListener('scroll', onScrollParallax);
             return;
         }
 
-        // Desktop: add scroll listener
+        // Otherwise enable it for desktop
         window.addEventListener('scroll', onScrollParallax);
     }
 
